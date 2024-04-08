@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour Psychology Spin Wheel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background:#333 ;
+        }
+
+        .container{
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .spinBtn{
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #fff;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 0.1em;
+            border: 4px solid rgba(0,0,0,0.75) ;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .container .spinBtn::before{
+            content: "";
+            position: absolute;
+            top:-28px;
+            width: 20px;
+            height: 30px;
+            background: #fff;
+            clip-path: polygon(50% 0%,15% 100%,85% 100%);
+        }
+
+        .container .wheel{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #333;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 0 5px #333, 0 0 0 15px #fff, 0 0 0 18px #111;
+            transition: transform 5s ease-in-out;
+        }
+
+        .container .wheel .number{
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background: var(--clr);
+            transform-origin: bottom right;
+            transform: rotate(calc(45deg * var(--i)));
+            clip-path: polygon(0 0, 56% 0,100% 100%,0 56%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .container .wheel .number span{
+            position: relative;
+            transform: rotate(45deg);
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #8a8a8a;
+            text-shadow: 3px 5px 2px rgba(196, 196, 196, 0.15);
+        }
+        #colorPsychologyMass{
+            width: 30%;
+            height: 200px;
+            font-size: 16px;
+            background-color: rgb(208, 255, 246);
+            margin: 50px;
+            border-radius: 30px;
+            color: #111;
+            box-shadow: 0 0 0 5px #333, 0 0 0 15px #fff, 0 0 0 18px #111;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+   <div id="colorPsychologyMass">
+     
+    <h1 placeholder="Spin the Spiner"> </h1>
+
+   </div>
+
+
+<div class="container">
+
+
+    <div class="spinBtn">
+        Spin
+    </div>
+
+    <div class="wheel">
+
+        <div class="number" style="--i:1;--clr:red;"><span>Red</span><!--<span> color is about Passion, excitement, love</span> --></div>
+        <div class="number" style="--i:8;--clr:Orange;"><span>Orange</span> <!--<span> color is about Optimism, friendly, warm</span> --></div>
+        <div class="number" style="--i:6;--clr:Blue;"><span>Blue</span> <!--<span> color is about Loyalty, professionalism, trust, sadness</span> --></div>
+        <div class="number" style="--i:4;--clr:yellow;"><span>Yellow</span> <!--<span> color is about Positivity, enthusiasm, happiness</span> --></div>
+        <div class="number" style="--i:5;--clr:Pink;"><span>Pink</span> <!--<span> color is about Fresh, feminine, playful, young</span> --></div>
+        <div class="number" style="--i:3;--clr:Purple;"><span>Purple</span> <!--<span> color is about Cool, spiritual, calm</span> --></div>
+        <div class="number" style="--i:7;--clr:White;" id="white"><span>White</span> <!--<span> color is about Truth, indifference</span> --></div>
+        <div class="number" style="--i:2;--clr:green;"><span>Green</span> <!--<span>color is about Harmony, nature, growth</span> --></div>
+
+    </div>
+
+</div>
+<script>
+let colourPsychology = {
+    Red: "Passion, excitement, love",
+    Orange: "Optimism, friendly, warm",
+    Blue: "Loyalty, professionalism, trust, sadness",
+    Yellow: "Positivity, enthusiasm, happiness",
+    Pink: "Fresh, feminine, playful, young",
+    Purple: "Cool, spiritual, calm",
+    White: "Truth, indifference",
+    Green: "Harmony, nature, growth"
+};
+
+let wheel = document.querySelector(".wheel");
+let spinBtn = document.querySelector(".spinBtn");
+
+spinBtn.onclick = function () {
+    let value = Math.ceil(Math.random() * 3600); // Generate random value each time
+    wheel.style.transform = "rotate(" + value + "deg)"; // Fix string concatenation
+}
+
+wheel.addEventListener("transitionend", function() {
+    let numbers = document.querySelectorAll('.number');
+    let topMostIndex = -1;
+    let topMostPosition = Number.POSITIVE_INFINITY;
+
+    numbers.forEach(function(number, index) {
+        let position = number.getBoundingClientRect().top;
+        if (position < topMostPosition) {
+            topMostIndex = index;
+            topMostPosition = position;
+        }
+    });
+
+    let topMostColor = numbers[topMostIndex].querySelector("span").innerText;
+    let colorPsychologyMessage = colourPsychology[topMostColor];
+    alert("Selected color: " + topMostColor + "\nColor psychology: " + colorPsychologyMessage);
+
+    // Display the alert text in the h1 element
+    let h1Element = document.querySelector("#colorPsychologyMass h1");
+    h1Element.innerText = "Selected color: " + topMostColor + "\nColor psychology: " + colorPsychologyMessage;
+});
+
+
+    
+</script>
+</body>
+</html>
