@@ -24,10 +24,6 @@ Contributions are welcome! Whether you want to add new colors, improve the user 
 
 This project is inspired by the concept of color psychology and aims to provide an engaging and educational experience for users.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE.md). Feel free to use, modify, and distribute it according to the terms of the license.
-
 ---
 
 **Get Started:** [Click here](index.html) to start exploring the Colour Psychology Spin Wheel!
