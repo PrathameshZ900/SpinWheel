@@ -26,4 +26,4 @@ This project is inspired by the concept of color psychology and aims to provide 
 
 ---
 
-**Get Started:** [Click here](SpinWheel/SpinWheel.html) to start exploring the Colour Psychology Spin Wheel!
+**Get Started:** [Click here](SpinWheel.html) to start exploring the Colour Psychology Spin Wheel!
