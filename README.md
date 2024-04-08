@@ -12,7 +12,7 @@ Welcome to the Colour Psychology Spin Wheel! 🌈 This project is an interactive
 ## Usage
 
 1. Clone this repository to your local machine.
-2. Open the `index.html` file in your web browser.
+2. Open the `SpinWheel.html` file in your web browser.
 3. Click the "Spin" button to start spinning the wheel.
 4. Explore the various colors and their meanings as you land on them.
 
